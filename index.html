@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yield Farm</title>
+</head>
+<body>
+  <h2>Register</h2>
+  <input id="reg-email" placeholder="Email">
+  <input id="reg-pass" placeholder="Password" type="password">
+  <button onclick="handleRegister()">Register</button>
 
+  <h2>Login</h2>
+  <input id="login-email" placeholder="Email">
+  <input id="login-pass" placeholder="Password" type="password">
+  <button onclick="handleLogin()">Login</button>
+
+  <h2>Deposit</h2>
+  <input id="dep-email" placeholder="Email">
+  <input id="dep-amount" placeholder="Amount" type="number">
+  <button onclick="handleDeposit()">Deposit</button>
+
+  <script src="script.js"></script>
+  <script>
+    async function handleRegister() {
+      const email = document.getElementById('reg-email').value;
+      const password = document.getElementById('reg-pass').value;
+      const res = await register(email, password);
+      alert(JSON.stringify(res));
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-pass').value;
+      const res = await login(email, password);
+      alert(JSON.stringify(res));
+    }
+
+    async function handleDeposit() {
+      const email = document.getElementById('dep-email').value;
+      const amount = document.getElementById('dep-amount').value;
+      const res = await deposit(email, amount);
+      alert(JSON.stringify(res));
+    }
+  </script>
+</body>
+</html>
