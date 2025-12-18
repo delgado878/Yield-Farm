@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YieldFarm | High-Yield USDT Staking</title>
-
-    <!-- External CSS -->
-    <link rel="stylesheet" href="style.css">
+    <title>YieldFarm | High-Yield USDT Farming</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,6 +13,48 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+
+        .crypto-grid {
+            background-image: 
+                linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Mobile responsiveness improvements */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .section-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        /* Profile dropdown styles */
+        .profile-dropdown {
+            transition: all 0.3s ease;
+        }
+    </style>
 
     <script>
         tailwind.config = {
@@ -38,7 +77,7 @@
         }
     </script>
 </head>
-<body class="defi-bg text-white font-mono min-h-screen">
+<body class="bg-defi-dark text-white font-mono min-h-screen">
     <!-- Animated background elements -->
     <div class="fixed inset-0 crypto-grid z-0"></div>
     <div class="fixed top-1/4 left-10 w-4 h-4 bg-defi-accent rounded-full opacity-20 animate-float"></div>
@@ -64,24 +103,46 @@
                     <a href="#faq" class="hover:text-defi-accent transition-colors">FAQ</a>
                 </nav>
 
-                <!-- Authentication Buttons -->
-                <div class="flex items-center space-x-4" id="auth-buttons">
-                    <button onclick="showAuthModal('login')" class="border border-defi-accent text-defi-accent hover:bg-defi-accent/10 font-bold py-2 px-6 rounded-lg transition-colors">
-                        Login
-                    </button>
-                    <button onclick="showAuthModal('register')" class="bg-defi-accent hover:bg-defi-accent-hover text-defi-darker font-bold py-2 px-6 rounded-lg transition-colors">
-                        Sign Up
-                    </button>
-                </div>
-
-                <!-- User Section (Hidden by default) -->
-                <div class="hidden items-center space-x-4" id="user-section">
-                    <div class="flex items-center space-x-3 bg-defi-darker/60 px-4 py-2 rounded-lg border border-defi-accent/20">
+                <!-- User Profile Dropdown -->
+                <div class="relative" id="user-section">
+                    <button id="profile-dropdown-button" class="flex items-center space-x-3 bg-defi-darker/60 px-4 py-2 rounded-lg border border-defi-accent/20 hover:bg-defi-darker transition-colors">
                         <div class="w-3 h-3 bg-defi-accent rounded-full animate-pulse-slow"></div>
-                        <span class="text-sm" id="user-email">user@example.com</span>
-                        <button onclick="logout()" class="text-defi-muted hover:text-defi-accent">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </button>
+                        <span class="text-sm max-w-[150px] truncate">alloysiousarinaitwe200@gmail.com</span>
+                        <i class="fas fa-chevron-down text-defi-accent text-xs"></i>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="profile-dropdown" class="profile-dropdown absolute right-0 mt-2 w-64 bg-defi-card rounded-xl border border-defi-accent/20 shadow-lg z-20 hidden">
+                        <div class="p-4 border-b border-defi-accent/20">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-defi-accent/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-defi-accent"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold truncate">alloysiousarinaitwe200@gmail.com</p>
+                                    <p class="text-defi-muted text-sm">Premium Investor</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <a href="#dashboard" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-defi-darker/60 transition-colors">
+                                <i class="fas fa-tachometer-alt text-defi-accent w-5"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            <a href="#invest" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-defi-darker/60 transition-colors">
+                                <i class="fas fa-chart-line text-defi-accent w-5"></i>
+                                <span>Invest</span>
+                            </a>
+                            <a href="#about" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-defi-darker/60 transition-colors">
+                                <i class="fas fa-info-circle text-defi-accent w-5"></i>
+                                <span>About Project</span>
+                            </a>
+                            <div class="border-t border-defi-accent/20 my-2"></div>
+                            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-defi-darker/60 transition-colors text-red-400 hover:text-red-300">
+                                <i class="fas fa-sign-out-alt w-5"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -94,103 +155,48 @@
             <!-- Mobile Menu (Hidden by default) -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-defi-accent/20 pt-4">
                 <div class="flex flex-col space-y-4">
-                    <a href="#dashboard" class="hover:text-defi-accent transition-colors">Dashboard</a>
-                    <a href="#invest" class="hover:text-defi-accent transition-colors">Invest</a>
-                    <a href="#about" class="hover:text-defi-accent transition-colors">About</a>
-                    <a href="#team" class="hover:text-defi-accent transition-colors">Team</a>
-                    <a href="#testimonials" class="hover:text-defi-accent transition-colors">Testimonials</a>
-                    <a href="#faq" class="hover:text-defi-accent transition-colors">FAQ</a>
-                    <div class="pt-4 border-t border-defi-accent/20" id="mobile-auth">
-                        <button onclick="showAuthModal('login')" class="w-full text-left py-2 hover:text-defi-accent">Login</button>
-                        <button onclick="showAuthModal('register')" class="w-full text-left py-2 hover:text-defi-accent">Sign Up</button>
-                    </div>
-                    <div class="hidden pt-4 border-t border-defi-accent/20" id="mobile-user">
-                        <div class="flex items-center space-x-3">
+                    <a href="#dashboard" class="hover:text-defi-accent transition-colors py-2">Dashboard</a>
+                    <a href="#invest" class="hover:text-defi-accent transition-colors py-2">Invest</a>
+                    <a href="#about" class="hover:text-defi-accent transition-colors py-2">About</a>
+                    <a href="#team" class="hover:text-defi-accent transition-colors py-2">Team</a>
+                    <a href="#testimonials" class="hover:text-defi-accent transition-colors py-2">Testimonials</a>
+                    <a href="#faq" class="hover:text-defi-accent transition-colors py-2">FAQ</a>
+                    <div class="pt-4 border-t border-defi-accent/20" id="mobile-user">
+                        <div class="flex items-center space-x-3 mb-4">
                             <div class="w-3 h-3 bg-defi-accent rounded-full animate-pulse-slow"></div>
-                            <span class="text-sm" id="mobile-user-email">user@example.com</span>
+                            <span class="text-sm truncate">alloysiousarinaitwe200@gmail.com</span>
                         </div>
-                        <button onclick="logout()" class="w-full text-left py-2 text-red-400 hover:text-red-300 mt-2">Logout</button>
+                        <a href="#" class="w-full text-left py-2 text-red-400 hover:text-red-300">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Auth Modal -->
-    <div id="auth-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-defi-card rounded-xl border border-defi-accent/20 w-full max-w-md relative">
-            <button onclick="hideAuthModal()" class="absolute top-4 right-4 text-defi-muted hover:text-white">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-
-            <!-- Login Form -->
-            <div id="login-form" class="p-6">
-                <h3 class="font-orbitron text-xl font-bold mb-6 text-center">Login to Your Account</h3>
-                <form id="loginForm">
-                    <div class="mb-4">
-                        <label class="block text-defi-muted mb-2">Email</label>
-                        <input type="email" id="loginEmail" required 
-                            class="w-full bg-defi-darker border border-defi-accent/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-defi-accent">
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-defi-muted mb-2">Password</label>
-                        <input type="password" id="loginPassword" required 
-                            class="w-full bg-defi-darker border border-defi-accent/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-defi-accent">
-                    </div>
-                    <button type="submit" class="w-full bg-defi-accent hover:bg-defi-accent-hover text-defi-darker font-bold py-3 px-4 rounded-lg transition-colors">
-                        Login
-                    </button>
-                </form>
-                <p class="text-defi-muted text-center mt-4">
-                    Don't have an account? <button onclick="showAuthModal('register')" class="text-defi-accent hover:underline">Sign Up</button>
-                </p>
-            </div>
-
-            <!-- Register Form -->
-            <div id="register-form" class="p-6 hidden">
-                <h3 class="font-orbitron text-xl font-bold mb-6 text-center">Create Account</h3>
-                <form id="registerForm">
-                    <div class="mb-4">
-                        <label class="block text-defi-muted mb-2">Email</label>
-                        <input type="email" id="registerEmail" required 
-                            class="w-full bg-defi-darker border border-defi-accent/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-defi-accent">
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-defi-muted mb-2">Password</label>
-                        <input type="password" id="registerPassword" required 
-                            class="w-full bg-defi-darker border border-defi-accent/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-defi-accent">
-                    </div>
-                    <button type="submit" class="w-full bg-defi-accent hover:bg-defi-accent-hover text-defi-darker font-bold py-3 px-4 rounded-lg transition-colors">
-                        Create Account
-                    </button>
-                </form>
-                <p class="text-defi-muted text-center mt-4">
-                    Already have an account? <button onclick="showAuthModal('login')" class="text-defi-accent hover:underline">Login</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <main class="relative z-10 container mx-auto px-4 py-8">
+    <main class="relative z-10 container mx-auto px-4 py-8 section-padding">
         <!-- Hero Section -->
         <section class="text-center py-16 mb-8">
-            <h1 class="font-orbitron text-4xl md:text-6xl font-bold mb-6">Yield <span class="text-defi-accent">Farming</span> Reinvented</h1>
-            <p class="text-defi-muted text-xl max-w-2xl mx-auto mb-8">Earn 30% to 200% APY on your USDT deposits. The future of decentralized finance is here.</p>
+            <h1 class="font-orbitron text-4xl md:text-6xl font-bold mb-6 hero-title">Yield <span class="text-defi-accent">Farming</span> Reinvented</h1>
+            <p class="text-defi-muted text-lg md:text-xl max-w-2xl mx-auto mb-8">Earn 30% to 200% APY on your USDT deposits. The future of decentralized finance is here.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#invest" class="bg-defi-accent hover:bg-defi-accent-hover text-defi-darker font-bold py-3 px-8 rounded-lg transition-colors">Start Earning Now</a>
-                <a href="#about" class="border border-defi-accent text-defi-accent hover:bg-defi-accent/10 font-bold py-3 px-8 rounded-lg transition-colors">Learn More</a>
+                <a href="#invest" class="bg-defi-accent hover:bg-defi-accent-hover text-defi-darker font-bold py-3 px-8 rounded-lg transition-colors text-center">Start Earning Now</a>
+                <a href="#about" class="border border-defi-accent text-defi-accent hover:bg-defi-accent/10 font-bold py-3 px-8 rounded-lg transition-colors text-center">Learn More</a>
             </div>
         </section>
+
+
+
+
 
         <!-- Dashboard Section -->
         <section id="dashboard" class="mb-16">
             <h2 class="font-orbitron text-3xl font-bold mb-8 text-center">Investment Dashboard</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div class="bg-defi-card p-6 rounded-xl border border-defi-accent/20">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-defi-muted">Total Balance</p>
-                            <p class="text-3xl font-bold mt-2" id="balance-display">0.00 USDT</p>
+                            <p class="text-defi-muted">Total Investment</p>
+                            <p class="text-3xl font-bold mt-2" id="balance-display">570.000 USDT</p>
                         </div>
                         <i class="fas fa-wallet text-defi-accent text-2xl"></i>
                     </div>
@@ -199,7 +205,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-defi-muted">Active Investments</p>
-                            <p class="text-3xl font-bold mt-2" id="investments-display">0</p>
+                            <p class="text-3xl font-bold mt-2" id="investments-display">1</p>
                         </div>
                         <i class="fas fa-chart-line text-defi-accent text-2xl"></i>
                     </div>
@@ -207,10 +213,50 @@
                 <div class="bg-defi-card p-6 rounded-xl border border-defi-accent/20">
                     <div class="flex justify-between items-start">
                         <div>
+
+
                             <p class="text-defi-muted">Total Earnings</p>
-                            <p class="text-3xl font-bold mt-2" id="earnings-display">0.00 USDT</p>
+
+
+
+
+                            <p class="text-3xl font-bold mt-2" id="earnings-display">562.500 USDT</p>
+
+
+
+
+
+
+
+
+
                         </div>
                         <i class="fas fa-coins text-defi-accent text-2xl"></i>
+                    </div>
+                </div>
+                <!-- NEW: Total Balance Card -->
+                <div class="bg-defi-card p-6 rounded-xl border border-defi-accent/20">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-defi-muted">Total Balance</p>
+
+
+
+
+
+                            <p class="text-3xl font-bold mt-2" id="total-balance-display">1132.500 USDT</p>
+
+
+
+
+
+
+
+
+
+          <p class="text-sm text-defi-accent mt-1" id="balance-breakdown"></p>
+                        </div>
+                        <i class="fas fa-chart-pie text-defi-accent text-2xl"></i>
                     </div>
                 </div>
             </div>
@@ -219,7 +265,7 @@
             <div class="bg-defi-card p-6 rounded-xl border border-defi-accent/20">
                 <h3 class="font-orbitron text-xl font-bold mb-6">Weekly Earnings Projection</h3>
                 <div class="h-64 flex items-center justify-center border-2 border-dashed border-defi-accent/30 rounded-lg">
-                    <p class="text-defi-muted" id="chart-message">Earnings chart will appear here when you have active investments</p>
+                    <p class="text-defi-muted text-center px-4" id="chart-message">Earnings chart will appear here when you have active investments</p>
                     <canvas id="earnings-chart" class="hidden"></canvas>
                 </div>
             </div>
@@ -291,9 +337,9 @@
                     <div class="mb-6">
                         <label class="block text-defi-muted mb-2">Deposit Wallet Address</label>
                         <div class="flex">
-                            <input type="text" id="wallet-address" value="0x71C7656EC7ab88b098defB751B7401B5f6d897AB" readonly 
-                                class="flex-grow bg-defi-darker border border-defi-accent/20 rounded-l-lg py-3 px-4 text-defi-muted">
-                            <button id="copy-address" class="bg-defi-accent hover:bg-defi-accent-hover text-defi-darker font-bold py-3 px-4 rounded-r-lg transition-colors">
+                            <input type="text" id="wallet-address" value="0x49e33f878da28b7915f4387c13ff84ee4f2ed898" readonly 
+                                class="flex-grow bg-defi-darker border border-defi-accent/20 rounded-l-lg py-3 px-4 text-defi-muted text-xs md:text-base truncate">
+                            <button id="copy-address" class="bg-defi-accent hover:bg-defi-accent-hover text-defi-darker font-bold py-3 px-4 rounded-r-lg transition-colors whitespace-nowrap">
                                 Copy
                             </button>
                         </div>
@@ -320,7 +366,7 @@
         <!-- About Section -->
         <section id="about" class="mb-16">
             <h2 class="font-orbitron text-3xl font-bold mb-8 text-center">About YieldFarm</h2>
-            <div class="bg-defi-card p-8 rounded-xl border border-defi-accent/20">
+            <div class="bg-defi-card p-6 md:p-8 rounded-xl border border-defi-accent/20">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div>
                         <h3 class="font-orbitron text-2xl font-bold mb-6 text-defi-accent">Pioneering DeFi Since 2017</h3>
@@ -378,7 +424,7 @@
                 <!-- Testimonial 2 -->
                 <div class="bg-defi-card p-6 rounded-xl border border-defi-accent/20">
                     <div class="flex items-center mb-4">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" alt="Sarah Chen" class="w-12 h-12 rounded-full mr-4">
+                        <img src="images/chen.jpeg" alt="Sarah Chen" class="w-12 h-12 rounded-full mr-4">
                         <div>
                             <h4 class="font-bold">Sarah Chen</h4>
                             <p class="text-defi-muted text-sm">DeFi Enthusiast</p>
@@ -524,7 +570,159 @@
         </div>
     </footer>
 
-    <!-- External JavaScript -->
-    <script src="script.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Profile dropdown toggle
+        document.getElementById('profile-dropdown-button').addEventListener('click', function() {
+            const dropdown = document.getElementById('profile-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('profile-dropdown');
+            const button = document.getElementById('profile-dropdown-button');
+
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+
+        // Initial investment and earnings values
+        const initialInvestment = ;
+        const manualEarnings = ;
+
+        // Calculate and display total balance
+        function calculateTotalBalance() {
+            const totalBalance = initialInvestment + manualEarnings;
+
+            // Update the total balance display
+            document.getElementById('total-balance-display').textContent = totalBalance.toFixed(3) + ' USDT';
+
+            // Update the breakdown
+            document.getElementById('balance-breakdown').textContent = 
+                `${initialInvestment.toFixed(3)} + ${manualEarnings.toFixed(3)}`;
+        }
+
+        // Function to update earnings manually (for daily updates)
+        function updateEarnings(newEarnings) {
+            // You would call this function daily with the updated earnings
+            manualEarnings = newEarnings;
+            document.getElementById('earnings-display').textContent = manualEarnings.toFixed(3) + ' USDT';
+            calculateTotalBalance();
+        }
+
+        // Function to update initial investment (if needed)
+        function updateInitialInvestment(newInvestment) {
+            initialInvestment = newInvestment;
+            document.getElementById('balance-display').textContent = initialInvestment.toFixed(3) + ' USDT';
+            calculateTotalBalance();
+        }
+
+        // Calculate initial total balance on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTotalBalance();
+        });
+
+        // Investment calculator functionality
+        document.getElementById('term').addEventListener('input', function() {
+            document.getElementById('termValue').textContent = this.value;
+        });
+
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const term = parseInt(document.getElementById('term').value);
+            const compound = document.getElementById('compound').value;
+
+            // Simple calculation for demonstration
+            const apy = 30 + (term - 3) * 7.4; // APY increases with term
+            let total;
+
+            if (compound === 'monthly') {
+                const monthlyRate = apy / 12 / 100;
+                total = amount * Math.pow(1 + monthlyRate, term);
+            } else {
+                total = amount * (1 + (apy / 100) * (term / 12));
+            }
+
+            const earnings = total - amount;
+
+            document.getElementById('result').innerHTML = `
+                <div class="text-center">
+                    <p class="text-defi-muted mb-2">Projected Returns for ${term} months</p>
+                    <p class="text-2xl font-bold text-defi-accent mb-2">${total.toFixed(2)} USDT</p>
+                    <p class="text-defi-muted">Total Earnings: <span class="text-defi-accent">${earnings.toFixed(2)} USDT</span></p>
+                    <p class="text-defi-muted text-sm mt-2">APY: ${apy.toFixed(1)}%</p>
+                </div>
+            `;
+
+            // Update deposit form
+            document.getElementById('selected-amount').value = amount + ' USDT';
+            document.getElementById('selected-term').value = term + ' months';
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            document.getElementById('amount').value = 5000;
+            document.getElementById('term').value = 12;
+            document.getElementById('termValue').textContent = 12;
+            document.getElementById('compound').value = 'monthly';
+            document.getElementById('result').innerHTML = '<p class="text-defi-muted text-center">Enter your investment details to see projected returns</p>';
+            document.getElementById('selected-amount').value = '';
+            document.getElementById('selected-term').value = '';
+        });
+
+        // Copy wallet address
+        document.getElementById('copy-address').addEventListener('click', function() {
+            const address = document.getElementById('wallet-address');
+            address.select();
+            document.execCommand('copy');
+
+            const originalText = this.textContent;
+            this.textContent = 'Copied!';
+            this.classList.add('bg-green-500');
+
+            setTimeout(() => {
+                this.textContent = originalText;
+                this.classList.remove('bg-green-500');
+            }, 2000);
+        });
+
+        // Submit transaction
+        document.getElementById('submit-tx').addEventListener('click', function() {
+            const txHash = document.getElementById('tx-hash').value;
+
+            if (txHash.trim() === '') {
+                alert('Please enter a transaction hash');
+                return;
+            }
+
+            // Show success message
+            document.getElementById('success-message').classList.remove('hidden');
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                document.getElementById('tx-hash').value = '';
+                document.getElementById('success-message').classList.add('hidden');
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
